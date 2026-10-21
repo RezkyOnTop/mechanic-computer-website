@@ -28,14 +28,15 @@ export default function CorporateSite() {
     <header className={styles.header}>
       <a className={styles.brand} href="#top" aria-label="Mechanic Computer home"><img src="/mechanic-logo-lockup.png" alt="Mechanic Computer" /></a>
       <nav className={styles.nav} aria-label="Primary navigation"><a href="#services">Services</a><a href="#approach">Approach</a><a href="#technology">Technology</a></nav>
-      <a className={styles.headerCta} href="#contact"><span className={styles.ctaLabel}>Start a project</span><b>↗</b></a>
+      <a className={styles.headerCta} href="#contact" aria-label="Start a project"><span className={styles.ctaLabel}>Start a project</span><b>↗</b></a>
     </header>
 
     <main id="main">
       <section id="top" className={styles.hero} aria-labelledby="hero-title">
-        <div className={styles.heroCopy}><p className={styles.eyebrow}>Mechanic Computer · Jakarta, Indonesia</p><h1 id="hero-title">Technology built<br /><em>for work ahead.</em></h1><p className={styles.lead}>We design AI systems, cloud platforms, backend services, and delivery operations that teams can run with confidence.</p><div className={styles.heroActions}><a href="#contact" className={styles.primary}>Start a conversation <span>↗</span></a><a href="#services" className={styles.secondary}>Explore services</a></div></div>
-        <div className={styles.heroVisual} aria-label="Connected technology platform diagram"><span className={styles.visualLabel}>OPERATING PLATFORM</span><div className={styles.diagram}><div className={styles.diagramCore}>MC</div><div className={styles.diagramNode}>AI</div><div className={styles.diagramNode}>API</div><div className={styles.diagramNode}>OPS</div><i /><i /><i /></div><p>Architecture that connects product, infrastructure, data, and operations.</p></div>
-        <div className={styles.heroProof}><div><strong>4</strong><span>Core technical disciplines</span></div><div><strong>End-to-end</strong><span>From architecture to handover</span></div><div><strong>Built to run</strong><span>Clear systems. Clear ownership.</span></div></div>
+        <div className={styles.heroMeta}><span>MC / 2026</span><span>Jakarta, Indonesia</span><span>Engineering systems that last</span></div>
+        <div className={styles.heroCopy}><h1 id="hero-title">Technology<br />with <em>traction.</em></h1><p className={styles.lead}>AI systems, cloud infrastructure, backend platforms, and delivery operations built for teams doing serious work.</p><div className={styles.heroActions}><a href="#contact" className={styles.primary}>Start a project <span>↗</span></a><a href="#services" className={styles.secondary}>See capabilities</a></div></div>
+        <div className={styles.heroVisual} aria-label="Mechanic Computer systems field"><span className={styles.visualLabel}>LIVE SYSTEM FIELD</span><div className={styles.field}><div className={styles.fieldHalo} /><div className={styles.fieldCore}>MC</div><span className={styles.fieldTag}>AI / CORE</span><span className={styles.fieldTag}>CLOUD / EDGE</span><span className={styles.fieldTag}>DATA / FLOW</span><i /><i /><i /><i /></div><p>Every system designed as one connected operating surface.</p></div>
+        <div className={styles.heroProof}><div><strong>AI</strong><span>Intelligent systems</span></div><div><strong>Cloud</strong><span>Reliable foundations</span></div><div><strong>Ops</strong><span>Delivery with control</span></div></div>
       </section>
 
       <section className={styles.intro}><p>Mechanic Computer is an engineering partner for teams that need technology to become dependable business infrastructure—not another fragile experiment.</p></section>
