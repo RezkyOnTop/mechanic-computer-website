@@ -81,6 +81,7 @@ export default function CorporateSite() {
   const [filled, setFilled] = useState(0)
   const [formReady, setFormReady] = useState(false)
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+  const [menu, setMenu] = useState(false)
   const active = services[selected]
 
   function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -111,6 +112,15 @@ export default function CorporateSite() {
       <a className={styles.brand} href="#top" aria-label="Mechanic Computer home"><img src="/mechanic-logo-lockup.png" alt="Mechanic Computer" /></a>
       <nav className={styles.nav} aria-label="Primary navigation"><Link href="/services">Services</Link><Link href="/about">About</Link><a href="#partners">Partners</a><Link href="/#technology">Technology</Link><a href="#contact">Contact</a></nav>
       <a className={styles.headerCta} href="#contact" aria-label="Start a project"><span className={styles.ctaLabel}>Start a project</span><b>↗</b></a>
+      <button className={styles.burger} type="button" aria-label={menu ? 'Close menu' : 'Open menu'} aria-expanded={menu} aria-controls="mobile-nav" onClick={() => setMenu(!menu)}><i /><i /><i /></button>
+      <div id="mobile-nav" className={`${styles.mobileNav} ${menu ? styles.mobileNavOpen : ''}`}>
+        <Link href="/services" onClick={() => setMenu(false)}>Services</Link>
+        <Link href="/about" onClick={() => setMenu(false)}>About</Link>
+        <a href="#partners" onClick={() => setMenu(false)}>Partners</a>
+        <Link href="/#technology" onClick={() => setMenu(false)}>Technology</Link>
+        <a href="#contact" onClick={() => setMenu(false)}>Contact</a>
+        <a href="https://wa.me/6289580319561" target="_blank" rel="noopener noreferrer" onClick={() => setMenu(false)}>WhatsApp ↗</a>
+      </div>
     </header>
 
     <main id="main">
