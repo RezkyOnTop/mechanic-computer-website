@@ -58,30 +58,17 @@ export default function CorporateSite() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const active = services[selected]
 
-  async function submit(event: React.FormEvent<HTMLFormElement>) {
+  function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    if (status === 'sending') return
     const form = event.currentTarget
     const data = new FormData(form)
-    setStatus('sending')
-    try {
-      const res = await fetch('/api/enquiry', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: String(data.get('name') || ''),
-          email: String(data.get('email') || ''),
-          message: String(data.get('message') || ''),
-        }),
-      })
-      if (!res.ok) throw new Error('send-failed')
-      setStatus('sent')
-      form.reset()
-      setFilled(0)
-      setFormReady(false)
-    } catch {
-      setStatus('error')
-    }
+    const name = String(data.get('name') || '').trim()
+    const email = String(data.get('email') || '').trim()
+    const message = String(data.get('message') || '').trim()
+    const subject = encodeURIComponent(`Project enquiry — ${name || 'New lead'}`)
+    const body = encodeURIComponent(`${message}\n\n—\n${name}\n${email}`)
+    window.location.href = `mailto:project@mechaniccomputer.biz.id?subject=${subject}&body=${body}`
+    setStatus('sent')
   }
 
   useEffect(() => {
@@ -123,18 +110,18 @@ export default function CorporateSite() {
 
       <section className={styles.faq} aria-labelledby="faq-title"><div className={styles.sectionHead}><p className={styles.eyebrow}>FAQ</p><h2 id="faq-title">Clear before<br />we begin.</h2></div><div className={styles.faqList}>{faqs.map(([question, answer], index) => <article key={question} className={openFaq === index ? styles.faqOpen : ''}><button aria-expanded={openFaq === index} onClick={() => setOpenFaq(openFaq === index ? null : index)}><span>{question}</span><b>+</b></button>{openFaq === index && <p>{answer}</p>}</article>)}</div></section>
 
-      <section id="contact" className={styles.contact} aria-labelledby="contact-title"><div className={styles.contactIntro}><p className={styles.eyebrow}>Start a project</p><h2 id="contact-title">Bring the hard part<br />to the table.</h2><p className={styles.contactLead}>Tell us what is changing, what is stuck, or what must run better. You will get a direct answer, not a sales sequence.</p><div className={styles.contactCards}><a className={styles.contactCard} href="mailto:hello@mechaniccomputer.biz.id"><span className={styles.cardIcon} aria-hidden="true">✉</span><span className={styles.cardBody}><small>Email</small><strong>hello@mechaniccomputer.biz.id</strong></span><b aria-hidden="true">↗</b></a><a className={styles.contactCard} href="https://wa.me/6289580319561" target="_blank" rel="noopener noreferrer"><span className={styles.cardIcon} aria-hidden="true">wa</span><span className={styles.cardBody}><small>WhatsApp</small><strong>+62 895-8031-95612</strong></span><b aria-hidden="true">↗</b></a><div className={`${styles.contactCard} ${styles.contactCardStatic}`}><span className={styles.cardIcon} aria-hidden="true">◎</span><span className={styles.cardBody}><small>Location</small><strong>Jl. Barjad, Loktabat Utara, Banjarbaru Utara, Banjarbaru, Kalimantan Selatan 70714</strong></span></div></div><p className={styles.contactNote}>Typical reply within one business day. Banjarbaru time, UTC+8.</p></div>
-        <form className={`${styles.contactForm} ${formReady ? styles.formComplete : ''} ${status === 'sent' ? styles.formSent : ''}`} onSubmit={submit} onInput={(event) => { const form = event.currentTarget; const count = ['name', 'email', 'message'].filter((name) => { const el = form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | null; return !!el && el.value.trim().length > 0 }).length; setFilled(count); setFormReady(count === 3) }}>
+      <section id="contact" className={styles.contact} aria-labelledby="contact-title"><div className={styles.contactIntro}><p className={styles.eyebrow}>Start a project</p><h2 id="contact-title">Bring the hard part<br />to the table.</h2><p className={styles.contactLead}>Tell us what is changing, what is stuck, or what must run better. You will get a direct answer, not a sales sequence.</p><div className={styles.contactCards}><a className={styles.contactCard} href="mailto:project@mechaniccomputer.biz.id"><span className={styles.cardIcon} aria-hidden="true">✉</span><span className={styles.cardBody}><small>Email</small><strong>project@mechaniccomputer.biz.id</strong></span><b aria-hidden="true">↗</b></a><a className={styles.contactCard} href="https://wa.me/6289580319561" target="_blank" rel="noopener noreferrer"><span className={styles.cardIcon} aria-hidden="true">wa</span><span className={styles.cardBody}><small>WhatsApp</small><strong>+62 895-8031-95612</strong></span><b aria-hidden="true">↗</b></a><div className={`${styles.contactCard} ${styles.contactCardStatic}`}><span className={styles.cardIcon} aria-hidden="true">◎</span><span className={styles.cardBody}><small>Location</small><strong>Jl. Barjad, Loktabat Utara, Banjarbaru Utara, Banjarbaru, Kalimantan Selatan 70714</strong></span></div></div><p className={styles.contactNote}>Typical reply within one business day. Banjarbaru time, UTC+8.</p></div>
+        <form className={`${styles.contactForm} ${formReady ? styles.formComplete : ''} `} onSubmit={submit} onInput={(event) => { const form = event.currentTarget; const count = ['name', 'email', 'message'].filter((name) => { const el = form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | null; return !!el && el.value.trim().length > 0 }).length; setFilled(count); setFormReady(count === 3) }}>
           <div className={styles.formHead}><div><span className={styles.formKicker}>Brief intake</span><strong>Project enquiry</strong></div><span className={styles.formProgress} aria-live="polite">{String(filled).padStart(2, '0')} / 03</span></div>
           <div className={styles.progressTrack} aria-hidden="true"><i style={{ width: `${(filled / 3) * 100}%` }} /></div>
           <label className={styles.formField}><span>Name</span><input name="name" placeholder="Your name" autoComplete="name" required /></label>
           <label className={styles.formField}><span>Work email</span><input type="email" name="email" placeholder="you@company.com" autoComplete="email" required /></label>
           <label className={styles.formField}><span>Message</span><textarea name="message" placeholder="What are you building, migrating, or fixing?" required /></label>
-          <button className={styles.submit} type="submit" disabled={status === 'sending'}><span>{status === 'sending' ? 'Sending…' : status === 'sent' ? 'Enquiry received' : formReady ? 'Ready to send' : 'Send enquiry'}</span><b aria-hidden="true">{status === 'sent' ? '✓' : '↗'}</b></button>
-          <div className={styles.formFoot}><span className={styles.formDots} aria-hidden="true"><i className={filled > 0 ? styles.dotOn : ''} /><i className={filled > 1 ? styles.dotOn : ''} /><i className={filled > 2 ? styles.dotOn : ''} /></span><small aria-live="polite">{status === 'sent' ? 'Received. Expect a direct reply within one business day.' : status === 'error' ? 'Could not send. Try email or WhatsApp below.' : 'Straight to our inbox. No newsletter, no resale.'}</small></div>
+          <button className={styles.submit} type="submit"><span>{formReady ? 'Open in email app' : 'Compose enquiry'}</span><b aria-hidden="true">↗</b></button>
+          <div className={styles.formFoot}><span className={styles.formDots} aria-hidden="true"><i className={filled > 0 ? styles.dotOn : ''} /><i className={filled > 1 ? styles.dotOn : ''} /><i className={filled > 2 ? styles.dotOn : ''} /></span><small aria-live="polite">{status === 'sent' ? 'Email app opened with your details filled in.' : 'Opens your email app with everything pre-filled.'}</small></div>
         </form></section>
     </main>
 
-    <footer className={styles.footer}><div className={styles.footerTop}><div className={styles.footerBrand}><img src="/mechanic-logo-lockup.png" alt="Mechanic Computer" /><p>AI systems, cloud infrastructure, backend platforms, and DevOps delivery for teams doing serious work.</p></div><nav className={styles.footerCol} aria-label="Footer navigation"><span>Explore</span><a href="#services">Services</a><a href="#about">About</a><a href="#technology">Technology</a><a href="#approach">How we work</a></nav><div className={styles.footerCol}><span>Contact</span><a href="mailto:hello@mechaniccomputer.biz.id">hello@mechaniccomputer.biz.id</a><a href="https://wa.me/6289580319561" target="_blank" rel="noopener noreferrer">WhatsApp +62 895-8031-95612</a><p className={styles.footerPlace}>Jl. Barjad, Loktabat Utara, Banjarbaru Utara, Kalimantan Selatan 70714</p></div></div><div className={styles.footerBottom}><small>© 2026 Mechanic Computer. Banjarbaru, Indonesia. All rights reserved.</small><a href="#top">Back to top ↑</a></div></footer>
+    <footer className={styles.footer}><div className={styles.footerTop}><div className={styles.footerBrand}><img src="/mechanic-logo-lockup.png" alt="Mechanic Computer" /><p>AI systems, cloud infrastructure, backend platforms, and DevOps delivery for teams doing serious work.</p></div><nav className={styles.footerCol} aria-label="Footer navigation"><span>Explore</span><a href="#services">Services</a><a href="#about">About</a><a href="#technology">Technology</a><a href="#approach">How we work</a></nav><div className={styles.footerCol}><span>Contact</span><a href="mailto:project@mechaniccomputer.biz.id">project@mechaniccomputer.biz.id</a><a href="https://wa.me/6289580319561" target="_blank" rel="noopener noreferrer">WhatsApp +62 895-8031-95612</a><p className={styles.footerPlace}>Jl. Barjad, Loktabat Utara, Banjarbaru Utara, Kalimantan Selatan 70714</p></div></div><div className={styles.footerBottom}><small>© 2026 Mechanic Computer. Banjarbaru, Indonesia. All rights reserved.</small><a href="#top">Back to top ↑</a></div></footer>
   </div>
 }
