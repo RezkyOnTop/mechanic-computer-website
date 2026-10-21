@@ -100,9 +100,9 @@ export default function CorporateSite() {
         <form className={`${styles.contactForm} ${formReady ? styles.formComplete : ''}`} action="mailto:hello@mechaniccomputer.co.id" method="post" encType="text/plain" onInput={(event) => { const form = event.currentTarget; const count = ['name', 'email', 'message'].filter((name) => { const el = form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | null; return !!el && el.value.trim().length > 0 }).length; setFilled(count); setFormReady(count === 3) }}>
           <div className={styles.formHead}><div><span className={styles.formKicker}>Brief intake</span><strong>Project enquiry</strong></div><span className={styles.formProgress} aria-live="polite">{String(filled).padStart(2, '0')} / 03</span></div>
           <div className={styles.progressTrack} aria-hidden="true"><i style={{ width: `${(filled / 3) * 100}%` }} /></div>
-          <label className={styles.field}><span>Name</span><input name="name" placeholder="Your name" autoComplete="name" required /></label>
-          <label className={styles.field}><span>Work email</span><input type="email" name="email" placeholder="you@company.com" autoComplete="email" required /></label>
-          <label className={styles.field}><span>Message</span><textarea name="message" placeholder="What are you building, migrating, or fixing?" required /></label>
+          <label className={styles.formField}><span>Name</span><input name="name" placeholder="Your name" autoComplete="name" required /></label>
+          <label className={styles.formField}><span>Work email</span><input type="email" name="email" placeholder="you@company.com" autoComplete="email" required /></label>
+          <label className={styles.formField}><span>Message</span><textarea name="message" placeholder="What are you building, migrating, or fixing?" required /></label>
           <button className={styles.submit} type="submit"><span>{formReady ? 'Ready to send' : 'Send enquiry'}</span><b aria-hidden="true">↗</b></button>
           <div className={styles.formFoot}><span className={styles.formDots} aria-hidden="true"><i className={filled > 0 ? styles.dotOn : ''} /><i className={filled > 1 ? styles.dotOn : ''} /><i className={filled > 2 ? styles.dotOn : ''} /></span><small>Straight to our inbox. No newsletter, no resale.</small></div>
         </form></section>
