@@ -3,6 +3,9 @@ import Hero from '@/components/Hero'
 import Services from '@/components/Services'
 import About from '@/components/About'
 import Contact from '@/components/Contact'
+import TechStack from '@/components/TechStack'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Mechanic Computer - AI & Cloud Solutions',
@@ -11,11 +14,16 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main>
-      <Hero />
-      <Services />
-      <About />
-      <Contact />
-    </main>
+    <>
+      <Navbar />
+      <main>
+        <Hero />
+        <Services />
+        <TechStack />
+        <About />
+        <Contact />
+      </main>
+      <Footer />
+    </>
   )
 }

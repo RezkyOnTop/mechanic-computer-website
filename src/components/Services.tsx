@@ -1,49 +1,32 @@
 'use client'
 
-import { Brain, Globe, Database, Zap } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Brain, Cloud, Database, Workflow } from 'lucide-react'
 
 const services = [
-  {
-    icon: Brain,
-    title: 'AI & Intelligent Systems',
-    desc: 'Custom AI agents, LLM integration, and automation workflows.'
-  },
-  {
-    icon: Globe,
-    title: 'Web & App Hosting',
-    desc: 'High-performance hosting with 99.9% uptime guarantee.'
-  },
-  {
-    icon: Database,
-    title: 'Backend & Data Services',
-    desc: 'Scalable APIs, databases, and data management solutions.'
-  },
-  {
-    icon: Zap,
-    title: 'DevOps & Infrastructure',
-    desc: 'CI/CD pipelines, containerization, and 24/7 monitoring.'
-  }
+  { icon: Brain, title: 'AI & Intelligent Systems', desc: 'Custom AI agents, LLM integration, RAG pipelines, and workflow automation.' },
+  { icon: Cloud, title: 'Web & App Hosting', desc: 'Secure hosting for corporate websites and web applications, built for stable delivery.' },
+  { icon: Database, title: 'Backend & Data Services', desc: 'Reliable APIs, database design, caching, authentication, and system integration.' },
+  { icon: Workflow, title: 'DevOps & Infrastructure', desc: 'CI/CD, containers, monitoring, and cloud operations that keep releases moving.' },
 ]
 
 export default function Services() {
   return (
-    <section id="services" className="section-padding bg-gray-50 dark:bg-gray-800">
+    <section id="services" className="section-padding bg-neutral-50 dark:bg-navy-800">
       <div className="section-container">
-        <div className="max-w-2xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Our Services</h2>
-          <p className="text-gray-600 dark:text-gray-400">Comprehensive solutions for AI, cloud infrastructure, and DevOps.</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service) => {
+        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-2xl mb-12">
+          <p className="text-primary text-sm font-semibold tracking-widest uppercase mb-3">Capabilities</p>
+          <h2 className="heading-lg text-navy-900 dark:text-white mb-4">Built for systems that need to run.</h2>
+          <p className="body-large">Four focused capabilities. One accountable technical partner.</p>
+        </motion.div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {services.map((service, idx) => {
             const Icon = service.icon
-            return (
-              <div key={service.title} className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-lg transition-shadow">
-                <Icon className="text-blue-600 mb-4" size={32} />
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{service.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{service.desc}</p>
-              </div>
-            )
+            return <motion.article key={service.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.08 }} className="group min-h-64 rounded-xl border border-navy-700 bg-navy-900/50 p-6 hover:border-primary/70 hover:-translate-y-1 transition-all duration-300">
+              <div className="mb-8 grid h-11 w-11 place-items-center rounded-lg bg-primary/10 text-primary"><Icon size={22} /></div>
+              <h3 className="text-lg font-semibold text-white mb-3">{service.title}</h3>
+              <p className="text-sm leading-6 text-neutral-400">{service.desc}</p>
+            </motion.article>
           })}
         </div>
       </div>
