@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://mechanic-computer-website.vercel.app'),
+  metadataBase: new URL('https://mechaniccomputer.biz.id'),
   title: { default: 'Mechanic Computer | AI & Cloud Infrastructure', template: '%s | Mechanic Computer' },
   description: 'Mechanic Computer designs AI systems, cloud infrastructure, backend platforms, and DevOps delivery for teams doing serious work.',
   openGraph: {
