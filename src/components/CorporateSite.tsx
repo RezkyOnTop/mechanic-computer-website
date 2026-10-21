@@ -33,6 +33,12 @@ const technology = [
 
 const technologyCount = technology.reduce((total, group) => total + group.items.length, 0)
 
+const phases = [
+  ['Discover', '01', 'Scope, constraints, and dependencies mapped before a line of code.'],
+  ['Build', '02', 'Architecture, implementation, and release controls in one track.'],
+  ['Operate', '03', 'Ownership, observability, and a clear path for improvement.'],
+] as const
+
 const faqs = [
   ['What type of project can we discuss?', 'AI workflows, cloud platforms, internal tools, backend APIs, operational infrastructure, and the systems around them.'],
   ['Do you work with an existing engineering team?', 'Yes. Engagement can extend an existing team, lead a focused delivery track, or prepare a clean handover.'],
@@ -45,6 +51,8 @@ const faqs = [
 export default function CorporateSite() {
   const [selected, setSelected] = useState(0)
   const [openFaq, setOpenFaq] = useState<number | null>(0)
+  const [phase, setPhase] = useState(0)
+  const [pulse, setPulse] = useState(0)
   const active = services[selected]
 
   useEffect(() => {
@@ -68,7 +76,7 @@ export default function CorporateSite() {
       <section id="top" className={styles.hero} aria-labelledby="hero-title">
         <div className={styles.heroMeta}><span>Mechanic Computer</span><span>Jakarta, Indonesia</span><span>Engineering systems that last</span></div>
         <div className={styles.heroCopy}><p className={styles.heroKicker}>Technology partner for serious work</p><h1 id="hero-title">Build once.<br /><em>Operate well.</em></h1><p className={styles.lead}>AI systems, cloud infrastructure, backend platforms, and delivery operations designed to stay clear after launch.</p><div className={styles.heroActions}><a href="#contact" className={styles.primary}>Start a project <span>↗</span></a><a href="#services" className={styles.secondary}>Explore services</a></div></div>
-        <div className={styles.heroVisual} aria-label="Mechanic Computer systems field"><span className={styles.visualLabel}>CONNECTED DELIVERY</span><div className={styles.field}><div className={styles.fieldHalo} /><div className={styles.fieldCore}>MC</div><span className={styles.fieldTag}>DISCOVER</span><span className={styles.fieldTag}>BUILD</span><span className={styles.fieldTag}>OPERATE</span><i /><i /><i /><i /></div><p>One team across architecture, implementation, release, and operation.</p></div>
+        <div className={styles.heroVisual} aria-label="Mechanic Computer systems field"><span className={styles.visualLabel}>CONNECTED DELIVERY</span><div className={styles.field}><div className={styles.fieldHalo} /><div className={`${styles.fieldCore} ${styles.fieldCoreActive}`}><b>{phases[phase][1]}</b><small>{phases[phase][0]}</small></div><span key={`r-${pulse}`} className={styles.ripple} />{phases.map(([label], index) => <button type="button" key={label} onClick={() => { setPhase(index); setPulse((n) => n + 1) }} aria-pressed={phase === index} className={`${styles.fieldTag} ${styles.fieldTagPos} ${phase === index ? styles.fieldTagOn : ''}`}>{label}</button>)}<i /><i /><i /><i /></div><p key={`cap-${phase}`} className={styles.fieldCaption}>{phases[phase][2]}</p></div>
         <div className={styles.heroProof}><a href="#services"><strong>01</strong><span>Discover<br />the right scope</span><b>↗</b></a><a href="#services"><strong>02</strong><span>Build<br />with control</span><b>↗</b></a><a href="#approach"><strong>03</strong><span>Operate<br />with clarity</span><b>↗</b></a></div>
       </section>
 
