@@ -39,6 +39,23 @@ const phases = [
   ['Operate', '03', 'Ownership, observability, and a clear path for improvement.'],
 ] as const
 
+const governmentPartners = [
+  ['Dinas Komunikasi dan Informatika', 'Provinsi Kalimantan Selatan', 'diskominfo.kalselprov.go.id'],
+  ['Dinas Komunikasi dan Informatika', 'Kabupaten Kotabaru', 'diskominfo.kotabarukab.go.id'],
+  ['Dinas Komunikasi, Informatika, Statistik dan Persandian', 'Kabupaten Hulu Sungai Tengah', 'diskominfosp.hstkab.go.id'],
+  ['Dinas Komunikasi dan Informatika', 'Kabupaten Barito Kuala', 'diskominfo.baritokualakab.go.id'],
+  ['Dinas Komunikasi dan Informatika', 'Kota Banjarmasin', 'diskominfo.banjarmasinkota.go.id'],
+]
+
+const businessPartners = [
+  ['PT Arutmin Indonesia', 'Energi dan pertambangan', 'arutmin.com'],
+  ['PT Adaro Indonesia', 'Energi dan pertambangan', 'adaroindonesia.id'],
+  ['Jhonlin Group', 'Energi, agribisnis, logistik', 'jhonlin.co.id'],
+  ['Hasnur Group', 'Energi, perkebunan, logistik', 'hasnur.co.id'],
+  ['PT Agita Digital Technology', 'Pengembangan perangkat lunak', 'agitatechnology.com'],
+  ['Jawara Data', 'Konsultan transformasi digital', 'jawaradata.com'],
+]
+
 const faqs = [
   ['What type of project can we discuss?', 'AI workflows, cloud platforms, internal tools, backend APIs, operational infrastructure, and the systems around them.'],
   ['Do you work with an existing engineering team?', 'Yes. Engagement can extend an existing team, lead a focused delivery track, or prepare a clean handover.'],
@@ -84,7 +101,7 @@ export default function CorporateSite() {
     <a className={styles.skip} href="#main">Skip to content</a>
     <header className={styles.header}>
       <a className={styles.brand} href="#top" aria-label="Mechanic Computer home"><img src="/mechanic-logo-lockup.png" alt="Mechanic Computer" /></a>
-      <nav className={styles.nav} aria-label="Primary navigation"><a href="#services">Services</a><a href="#about">About</a><a href="#technology">Technology</a><a href="#contact">Contact</a></nav>
+      <nav className={styles.nav} aria-label="Primary navigation"><a href="#services">Services</a><a href="#about">About</a><a href="#partners">Partners</a><a href="#technology">Technology</a><a href="#contact">Contact</a></nav>
       <a className={styles.headerCta} href="#contact" aria-label="Start a project"><span className={styles.ctaLabel}>Start a project</span><b>↗</b></a>
     </header>
 
@@ -107,6 +124,8 @@ export default function CorporateSite() {
       <section className={styles.engagements} aria-labelledby="engagement-title"><div className={styles.sectionHead}><p className={styles.eyebrow}>Engagement models</p><h2 id="engagement-title">Work at the pace<br />your system needs.</h2></div><div className={styles.engagementList}><article><span>01</span><h3>Project-based</h3><p>Focused discovery, build, migration, or system upgrade with a defined outcome and handover.</p></article><article><span>02</span><h3>Retainer</h3><p>Ongoing technical improvement, advisory, and operational support with a predictable working rhythm.</p></article><article><span>03</span><h3>Dedicated team</h3><p>A focused engineering unit integrated with your product and operations team for sustained delivery.</p></article></div></section>
 
       <section id="technology" className={styles.technology} aria-labelledby="tech-title"><div className={styles.techCopy}><p className={styles.eyebrow}>Technology ecosystem</p><h2 id="tech-title">Tools selected<br />to do their job.</h2><p>Production technology across product, intelligence, cloud, data, delivery, and reliability.</p><strong className={styles.techCount}>{technologyCount} production-grade tools</strong></div><div className={styles.techGroups}>{technology.map(({ group, items }) => <section className={styles.techGroup} key={group} aria-label={group}><h3>{group}<span>{String(items.length).padStart(2, '0')}</span></h3><div className={styles.logoGrid}>{items.map(([src, name]) => <div className={styles.techItem} key={`${group}-${name}`}><img src={src} alt="" /><strong>{name}</strong></div>)}</div></section>)}</div></section>
+
+      <section id="partners" className={styles.partners} aria-labelledby="partners-title"><div className={styles.sectionHead}><p className={styles.eyebrow}>Partners &amp; network</p><h2 id="partners-title">Built with<br />local ground truth.</h2><p>Organisations we work alongside across South Kalimantan — public sector and private enterprise.</p></div><div className={styles.partnerBody}><div className={styles.partnerGroup}><div className={styles.partnerGroupHead}><span>Sector 01</span><h3>Government</h3><small>5 offices</small></div><ul>{governmentPartners.map(([office, area, host]) => <li key={host}><strong>{office}</strong><span>{area}</span><small>{host}</small></li>)}</ul></div><div className={styles.partnerGroup}><div className={styles.partnerGroupHead}><span>Sector 02</span><h3>Enterprise</h3><small>6 companies</small></div><ul>{businessPartners.map(([name, field, host]) => <li key={host}><strong>{name}</strong><span>{field}</span><small>{host}</small></li>)}</ul></div><p className={styles.partnerNote}>Names listed reflect organisations operating in South Kalimantan. Specific engagement scopes are shared only with permission.</p></div></section>
 
       <section className={styles.faq} aria-labelledby="faq-title"><div className={styles.sectionHead}><p className={styles.eyebrow}>FAQ</p><h2 id="faq-title">Clear before<br />we begin.</h2></div><div className={styles.faqList}>{faqs.map(([question, answer], index) => <article key={question} className={openFaq === index ? styles.faqOpen : ''}><button aria-expanded={openFaq === index} onClick={() => setOpenFaq(openFaq === index ? null : index)}><span>{question}</span><b>+</b></button>{openFaq === index && <p>{answer}</p>}</article>)}</div></section>
 
