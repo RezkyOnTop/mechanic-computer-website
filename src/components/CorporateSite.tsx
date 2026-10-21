@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import styles from './CorporateSite.module.css'
 
 const services = [
@@ -56,6 +57,13 @@ const businessPartners = [
   ['Hasnur Group', 'Energy, plantation, logistics', 'hasnur.co.id'],
 ]
 
+const workExamples = [
+  ['01', 'AI support triage', 'Service desk', 'Incoming tickets classified by intent and urgency before a human opens them. Retrieval over the internal knowledge base drafts the first reply.', 'Fewer misrouted tickets, faster first response'],
+  ['02', 'Zero-downtime migration', 'Infrastructure', 'A monolith moved to a containerised stack in stages, with traffic shifted per service and a tested rollback at each step.', 'No maintenance window, no data loss'],
+  ['03', 'Reporting off the primary', 'Data platform', 'Heavy operational reports moved to a read replica with pre-aggregated tables, instead of competing with live traffic on the main database.', 'Reporting stopped slowing the product'],
+  ['04', 'Pipeline rebuild', 'Delivery', 'Manual release steps replaced with a build pipeline, per-branch previews, and automated checks before anything reaches production.', 'Deploys went from hours to minutes'],
+]
+
 const faqs = [
   ['What type of project can we discuss?', 'AI workflows, cloud platforms, internal tools, backend APIs, operational infrastructure, and the systems around them.'],
   ['Do you work with an existing engineering team?', 'Yes. Engagement can extend an existing team, lead a focused delivery track, or prepare a clean handover.'],
@@ -101,7 +109,7 @@ export default function CorporateSite() {
     <a className={styles.skip} href="#main">Skip to content</a>
     <header className={styles.header}>
       <a className={styles.brand} href="#top" aria-label="Mechanic Computer home"><img src="/mechanic-logo-lockup.png" alt="Mechanic Computer" /></a>
-      <nav className={styles.nav} aria-label="Primary navigation"><a href="#services">Services</a><a href="#about">About</a><a href="#partners">Partners</a><a href="#technology">Technology</a><a href="#contact">Contact</a></nav>
+      <nav className={styles.nav} aria-label="Primary navigation"><Link href="/services">Services</Link><Link href="/about">About</Link><a href="#partners">Partners</a><Link href="/#technology">Technology</Link><a href="#contact">Contact</a></nav>
       <a className={styles.headerCta} href="#contact" aria-label="Start a project"><span className={styles.ctaLabel}>Start a project</span><b>↗</b></a>
     </header>
 
@@ -127,6 +135,8 @@ export default function CorporateSite() {
 
       <section id="partners" className={styles.partners} aria-labelledby="partners-title"><div className={styles.sectionHead}><p className={styles.eyebrow}>Partners &amp; network</p><h2 id="partners-title">Built with<br />local ground truth.</h2><p>Organisations we work alongside across South Kalimantan — public sector and private enterprise.</p></div><div className={styles.partnerBody}><div className={styles.partnerGroup}><div className={styles.partnerGroupHead}><span>Sector 01</span><h3>Government</h3><small>5 offices</small></div><ul>{governmentPartners.map(([office, area, host]) => <li key={host}><strong>{office}</strong><span>{area}</span><small>{host}</small></li>)}</ul></div><div className={styles.partnerGroup}><div className={styles.partnerGroupHead}><span>Sector 02</span><h3>Enterprise</h3><small>6 companies</small></div><ul>{businessPartners.map(([name, field, host]) => <li key={host}><strong>{name}</strong><span>{field}</span><small>{host}</small></li>)}</ul></div><p className={styles.partnerNote}>Names listed reflect organisations operating in South Kalimantan. Specific engagement scopes are shared only with permission.</p></div></section>
 
+      <section id="work" className={styles.workSection} aria-labelledby="work-title"><div className={styles.sectionHead}><p className={styles.eyebrow}>Work examples</p><h2 id="work-title">What the work<br />actually looks like.</h2><p>Representative engagement shapes, written from delivery practice — not client case studies.</p></div><div className={styles.workGrid}>{workExamples.map(([no, title, kind, body, result]) => <article key={no}><span className={styles.workNo}>{no}</span><div><span className={styles.workKind}>{kind}</span><h3>{title}</h3><p>{body}</p><strong>{result}</strong></div></article>)}</div><p className={styles.workNote}>Examples describe the shape of work we take on. Client-specific outcomes are shared only with permission.</p></section>
+
       <section className={styles.faq} aria-labelledby="faq-title"><div className={styles.sectionHead}><p className={styles.eyebrow}>FAQ</p><h2 id="faq-title">Clear before<br />we begin.</h2></div><div className={styles.faqList}>{faqs.map(([question, answer], index) => <article key={question} className={openFaq === index ? styles.faqOpen : ''}><button aria-expanded={openFaq === index} onClick={() => setOpenFaq(openFaq === index ? null : index)}><span>{question}</span><b>+</b></button>{openFaq === index && <p>{answer}</p>}</article>)}</div></section>
 
       <section id="contact" className={styles.contact} aria-labelledby="contact-title"><div className={styles.contactIntro}><p className={styles.eyebrow}>Start a project</p><h2 id="contact-title">Bring the hard part<br />to the table.</h2><p className={styles.contactLead}>Tell us what is changing, what is stuck, or what must run better. You will get a direct answer, not a sales sequence.</p><div className={styles.contactCards}><a className={styles.contactCard} href="mailto:project@mechaniccomputer.biz.id"><span className={styles.cardIcon} aria-hidden="true">✉</span><span className={styles.cardBody}><small>Email</small><strong>project@mechaniccomputer.biz.id</strong></span><b aria-hidden="true">↗</b></a><a className={styles.contactCard} href="https://wa.me/6289580319561" target="_blank" rel="noopener noreferrer"><span className={styles.cardIcon} aria-hidden="true">wa</span><span className={styles.cardBody}><small>WhatsApp</small><strong>+62 895-8031-95612</strong></span><b aria-hidden="true">↗</b></a><div className={`${styles.contactCard} ${styles.contactCardStatic}`}><span className={styles.cardIcon} aria-hidden="true">◎</span><span className={styles.cardBody}><small>Location</small><strong>Jl. Barjad, Loktabat Utara, Banjarbaru Utara, Banjarbaru, Kalimantan Selatan 70714</strong></span></div></div><p className={styles.contactNote}>Typical reply within one business day. Banjarbaru time, UTC+8.</p></div>
@@ -141,6 +151,6 @@ export default function CorporateSite() {
         </form></section>
     </main>
 
-    <footer className={styles.footer}><div className={styles.footerTop}><div className={styles.footerBrand}><img src="/mechanic-logo-lockup.png" alt="Mechanic Computer" /><p>AI systems, cloud infrastructure, backend platforms, and DevOps delivery for teams doing serious work.</p></div><nav className={styles.footerCol} aria-label="Footer navigation"><span>Explore</span><a href="#services">Services</a><a href="#about">About</a><a href="#technology">Technology</a><a href="#approach">How we work</a></nav><div className={styles.footerCol}><span>Contact</span><a href="mailto:project@mechaniccomputer.biz.id">project@mechaniccomputer.biz.id</a><a href="https://wa.me/6289580319561" target="_blank" rel="noopener noreferrer">WhatsApp +62 895-8031-95612</a><p className={styles.footerPlace}>Jl. Barjad, Loktabat Utara, Banjarbaru Utara, Kalimantan Selatan 70714</p></div></div><div className={styles.footerBottom}><small>© 2024 Mechanic Computer. Banjarbaru, Indonesia. All rights reserved.</small><span className={styles.footerLegal}><a href="/privacy">Privacy</a><a href="#top">Back to top ↑</a></span></div></footer>
+    <footer className={styles.footer}><div className={styles.footerTop}><div className={styles.footerBrand}><img src="/mechanic-logo-lockup.png" alt="Mechanic Computer" /><p>AI systems, cloud infrastructure, backend platforms, and DevOps delivery for teams doing serious work.</p></div><nav className={styles.footerCol} aria-label="Footer navigation"><span>Explore</span><Link href="/services">Services</Link><Link href="/about">About</Link><Link href="/#technology">Technology</Link><Link href="/#approach">How we work</Link></nav><div className={styles.footerCol}><span>Contact</span><a href="mailto:project@mechaniccomputer.biz.id">project@mechaniccomputer.biz.id</a><a href="https://wa.me/6289580319561" target="_blank" rel="noopener noreferrer">WhatsApp +62 895-8031-95612</a><p className={styles.footerPlace}>Jl. Barjad, Loktabat Utara, Banjarbaru Utara, Kalimantan Selatan 70714</p></div></div><div className={styles.footerBottom}><small>© 2024 Mechanic Computer. Banjarbaru, Indonesia. All rights reserved.</small><span className={styles.footerLegal}><Link href="/privacy">Privacy</Link><a href="#top">Back to top ↑</a></span></div></footer>
   </div>
 }

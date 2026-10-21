@@ -21,3 +21,16 @@
 @media(max-width:850px){.partners{padding:74px 22px;grid-template-columns:1fr;gap:30px}.partnerGroup ul{grid-template-columns:1fr}.partnerGroupHead h3{font-size:18px}}
 
 .footerLegal{display:inline-flex;align-items:center;gap:18px}.footerLegal a{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9fb6cf;transition:color .2s}.footerLegal a:hover{color:#fff}
+
+.workSection{padding:92px clamp(22px,7vw,118px);background:var(--soft);display:grid;grid-template-columns:.72fr 1.28fr;gap:64px;align-items:start}
+.workSection .sectionHead>p:not(.eyebrow){max-width:32ch;margin:26px 0 0;color:var(--muted);font-size:16px;line-height:1.6}
+.workGrid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#d3e1ed}
+.workGrid article{position:relative;display:grid;grid-template-columns:34px 1fr;gap:0 14px;padding:26px 24px;background:#fff;transition:background .25s,transform .25s}
+.workGrid article:hover{background:#f4fbff;transform:translateY(-3px)}
+.workNo{font:800 12px Manrope,sans-serif;letter-spacing:.06em;color:var(--blue);padding-top:4px}
+.workKind{display:inline-block;margin-bottom:9px;font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#8ba0b5}
+.workGrid h3{margin:0 0 10px;font:700 19px Manrope,sans-serif;letter-spacing:-.035em;color:var(--text)}
+.workGrid p{margin:0 0 14px;font-size:13.5px;line-height:1.6;color:var(--muted)}
+.workGrid strong{display:block;padding-top:12px;border-top:1px solid var(--line);font:700 12.5px Manrope,sans-serif;letter-spacing:-.005em;color:#0f7a4a}
+.workNote{grid-column:1/-1;margin:0;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;line-height:1.6;color:#8b9cad}
+@media(max-width:850px){.workSection{padding:74px 22px;grid-template-columns:1fr;gap:30px}.workGrid{grid-template-columns:1fr}}
