@@ -48,12 +48,12 @@ const governmentPartners = [
 ]
 
 const businessPartners = [
-  ['CV Twincom Sales & Service Center', 'Ritel dan servis komputer', 'twincom.co.id'],
-  ['CV Panda Computindo', 'Ritel dan servis komputer', 'Banjarmasin'],
-  ['CV Logika Nuansa Teknik', 'Konsultan teknologi informasi', 'logikanuansateknik.com'],
-  ['PT Agita Digital Technology', 'Pengembangan perangkat lunak', 'agitatechnology.com'],
-  ['Jawara Data', 'Konsultan transformasi digital', 'jawaradata.com'],
-  ['Hasnur Group', 'Energi, perkebunan, logistik', 'hasnur.co.id'],
+  ['CV Twincom Sales & Service Center', 'Computer retail and service', 'twincom.co.id'],
+  ['CV Panda Computindo', 'Computer retail and service', 'Banjarmasin'],
+  ['CV Logika Nuansa Teknik', 'IT consulting', 'logikanuansateknik.com'],
+  ['PT Agita Digital Technology', 'Software development', 'agitatechnology.com'],
+  ['Jawara Data', 'Digital transformation consulting', 'jawaradata.com'],
+  ['Hasnur Group', 'Energy, plantation, logistics', 'hasnur.co.id'],
 ]
 
 const faqs = [
