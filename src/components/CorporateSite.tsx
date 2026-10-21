@@ -11,13 +11,27 @@ const services = [
 ] as const
 
 const technology = [
-  ['/tech/nextjs.svg', 'Next.js', 'Web applications'],
-  ['/tech/docker.svg', 'Docker', 'Container delivery'],
-  ['/tech/postgresql.svg', 'PostgreSQL', 'Data foundation'],
-  ['/tech/redis.svg', 'Redis', 'Performance layer'],
-  ['/tech/ai-systems.svg', 'AI Systems', 'Applied intelligence'],
-  ['/tech/terraform.svg', 'Terraform', 'Infrastructure as code'],
+  { group: 'Application engineering', items: [
+    ['/tech/nextjs.svg', 'Next.js'], ['/tech/react.svg', 'React'], ['/tech/typescript.svg', 'TypeScript'], ['/tech/javascript.svg', 'JavaScript'], ['/tech/nodejs.svg', 'Node.js'], ['/tech/nestjs.svg', 'NestJS'], ['/tech/python.svg', 'Python'], ['/tech/go.svg', 'Go'], ['/tech/graphql.svg', 'GraphQL'],
+  ] },
+  { group: 'AI & automation', items: [
+    ['/tech/ai-systems.svg', 'AI Systems'], ['/tech/python.svg', 'Python'], ['/tech/redis.svg', 'Redis'], ['/tech/elasticsearch.svg', 'Elasticsearch'], ['/tech/apachekafka.svg', 'Kafka'], ['/tech/rabbitmq.svg', 'RabbitMQ'],
+  ] },
+  { group: 'Cloud & edge', items: [
+    ['/tech/amazonwebservices.svg', 'AWS'], ['/tech/googlecloud.svg', 'Google Cloud'], ['/tech/azure.svg', 'Azure'], ['/tech/cloudflare.svg', 'Cloudflare'], ['/tech/nginx.svg', 'NGINX'], ['/tech/linux.svg', 'Linux'],
+  ] },
+  { group: 'Data platforms', items: [
+    ['/tech/postgresql.svg', 'PostgreSQL'], ['/tech/mysql.svg', 'MySQL'], ['/tech/mongodb.svg', 'MongoDB'], ['/tech/redis.svg', 'Redis'], ['/tech/prisma.svg', 'Prisma'], ['/tech/elasticsearch.svg', 'Elasticsearch'],
+  ] },
+  { group: 'Delivery & infrastructure', items: [
+    ['/tech/docker.svg', 'Docker'], ['/tech/kubernetes.svg', 'Kubernetes'], ['/tech/terraform.svg', 'Terraform'], ['/tech/githubactions.svg', 'GitHub Actions'], ['/tech/git.svg', 'Git'], ['/tech/nginx.svg', 'NGINX'],
+  ] },
+  { group: 'Observability & reliability', items: [
+    ['/tech/prometheus.svg', 'Prometheus'], ['/tech/grafana.svg', 'Grafana'], ['/tech/sentry.svg', 'Sentry'], ['/tech/elasticsearch.svg', 'Elasticsearch'], ['/tech/kubernetes.svg', 'Kubernetes'],
+  ] },
 ] as const
+
+const technologyCount = technology.reduce((total, group) => total + group.items.length, 0)
 
 const faqs = [
   ['What type of project can we discuss?', 'AI workflows, cloud platforms, internal tools, backend APIs, operational infrastructure, and the systems around them.'],
@@ -68,7 +82,7 @@ export default function CorporateSite() {
 
       <section className={styles.engagements} aria-labelledby="engagement-title"><div className={styles.sectionHead}><p className={styles.eyebrow}>Engagement models</p><h2 id="engagement-title">Work at the pace<br />your system needs.</h2></div><div className={styles.engagementList}><article><span>01</span><h3>Project-based</h3><p>Focused discovery, build, migration, or system upgrade with a defined outcome and handover.</p></article><article><span>02</span><h3>Retainer</h3><p>Ongoing technical improvement, advisory, and operational support with a predictable working rhythm.</p></article><article><span>03</span><h3>Dedicated team</h3><p>A focused engineering unit integrated with your product and operations team for sustained delivery.</p></article></div></section>
 
-      <section id="technology" className={styles.technology} aria-labelledby="tech-title"><div className={styles.techCopy}><p className={styles.eyebrow}>Technology</p><h2 id="tech-title">Tools selected<br />to do their job.</h2><p>We use proven technology where it fits the system, the team, and long-term operation.</p></div><div className={styles.logoGrid}>{technology.map(([src, name, role]) => <div className={styles.techItem} key={name}><img src={src} alt="" /><div><strong>{name}</strong><span>{role}</span></div></div>)}</div></section>
+      <section id="technology" className={styles.technology} aria-labelledby="tech-title"><div className={styles.techCopy}><p className={styles.eyebrow}>Technology ecosystem</p><h2 id="tech-title">Tools selected<br />to do their job.</h2><p>Production technology across product, intelligence, cloud, data, delivery, and reliability.</p><strong className={styles.techCount}>{technologyCount} production-grade tools</strong></div><div className={styles.techGroups}>{technology.map(({ group, items }) => <section className={styles.techGroup} key={group} aria-label={group}><h3>{group}<span>{String(items.length).padStart(2, '0')}</span></h3><div className={styles.logoGrid}>{items.map(([src, name]) => <div className={styles.techItem} key={`${group}-${name}`}><img src={src} alt="" /><strong>{name}</strong></div>)}</div></section>)}</div></section>
 
       <section className={styles.faq} aria-labelledby="faq-title"><div className={styles.sectionHead}><p className={styles.eyebrow}>FAQ</p><h2 id="faq-title">Clear before<br />we begin.</h2></div><div className={styles.faqList}>{faqs.map(([question, answer], index) => <article key={question} className={openFaq === index ? styles.faqOpen : ''}><button aria-expanded={openFaq === index} onClick={() => setOpenFaq(openFaq === index ? null : index)}><span>{question}</span><b>+</b></button>{openFaq === index && <p>{answer}</p>}</article>)}</div></section>
 
