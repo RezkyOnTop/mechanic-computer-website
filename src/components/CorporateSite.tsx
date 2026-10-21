@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './CorporateSite.module.css'
 
 const services = [
@@ -33,18 +33,27 @@ export default function CorporateSite() {
   const [openFaq, setOpenFaq] = useState<number | null>(0)
   const active = services[selected]
 
+  useEffect(() => {
+    const targets = document.querySelectorAll<HTMLElement>('main section')
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+      if (entry.isIntersecting) { entry.target.classList.add(styles.inView); observer.unobserve(entry.target) }
+    }), { threshold: 0.12 })
+    targets.forEach((target) => { target.classList.add(styles.revealReady); observer.observe(target) })
+    return () => observer.disconnect()
+  }, [])
+
   return <div className={styles.site}>
     <a className={styles.skip} href="#main">Skip to content</a>
     <header className={styles.header}>
       <a className={styles.brand} href="#top" aria-label="Mechanic Computer home"><img src="/mechanic-logo-lockup.png" alt="Mechanic Computer" /></a>
-      <nav className={styles.nav} aria-label="Primary navigation"><a href="#services">Services</a><a href="#work">Work</a><a href="#about">About</a><a href="#technology">Technology</a></nav>
+      <nav className={styles.nav} aria-label="Primary navigation"><a href="#services">Services</a><a href="#about">About</a><a href="#technology">Technology</a><a href="#contact">Contact</a></nav>
       <a className={styles.headerCta} href="#contact" aria-label="Start a project"><span className={styles.ctaLabel}>Start a project</span><b>↗</b></a>
     </header>
 
     <main id="main">
       <section id="top" className={styles.hero} aria-labelledby="hero-title">
         <div className={styles.heroMeta}><span>MC / 2026</span><span>Jakarta, Indonesia</span><span>Engineering systems that last</span></div>
-        <div className={styles.heroCopy}><h1 id="hero-title">Technology<br />with <em>traction.</em></h1><p className={styles.lead}>AI systems, cloud infrastructure, backend platforms, and delivery operations built for teams doing serious work.</p><div className={styles.heroActions}><a href="#contact" className={styles.primary}>Start a project <span>↗</span></a><a href="#services" className={styles.secondary}>See capabilities</a></div></div>
+        <div className={styles.heroCopy}><h1 id="hero-title">Technology<br />built to <em>last.</em></h1><p className={styles.lead}>AI systems, cloud infrastructure, backend platforms, and delivery operations built for teams doing serious work.</p><div className={styles.heroActions}><a href="#contact" className={styles.primary}>Start a project <span>↗</span></a><a href="#services" className={styles.secondary}>See capabilities</a></div></div>
         <div className={styles.heroVisual} aria-label="Mechanic Computer systems field"><span className={styles.visualLabel}>LIVE SYSTEM FIELD</span><div className={styles.field}><div className={styles.fieldHalo} /><div className={styles.fieldCore}>MC</div><span className={styles.fieldTag}>AI / CORE</span><span className={styles.fieldTag}>CLOUD / EDGE</span><span className={styles.fieldTag}>DATA / FLOW</span><i /><i /><i /><i /></div><p>Every system designed as one connected operating surface.</p></div>
         <div className={styles.heroProof}><div><strong>AI</strong><span>Intelligent systems</span></div><div><strong>Cloud</strong><span>Reliable foundations</span></div><div><strong>Data</strong><span>Connected platforms</span></div><div><strong>Ops</strong><span>Delivery with control</span></div></div>
       </section>
@@ -53,9 +62,7 @@ export default function CorporateSite() {
 
       <section id="services" className={styles.services} aria-labelledby="services-title"><div className={styles.sectionHead}><p className={styles.eyebrow}>Capabilities</p><h2 id="services-title">Four capabilities.<br />One accountable team.</h2></div><div className={styles.serviceList}>{services.map(([no, title, text], index) => <button key={no} className={`${styles.service} ${selected === index ? styles.serviceActive : ''}`} aria-pressed={selected === index} onClick={() => setSelected(index)}><span>{no}</span><h3>{title}</h3><p>{text}</p><b>↗</b></button>)}</div><aside className={styles.serviceFocus}><span>Selected deliverables</span><h3>{active[1]}</h3><p>{active[2]}</p><a href="#contact">Discuss this capability <b>↗</b></a></aside></section>
 
-      <section id="work" className={styles.work} aria-labelledby="work-title"><div className={styles.sectionHead}><p className={styles.eyebrow}>Proof of work</p><h2 id="work-title">Traction needs<br />evidence.</h2><p className={styles.placeholderNote}>Portfolio, client, testimonial, and metric slots below are ready for verified material.</p></div><div className={styles.caseGrid}><article className={styles.caseCard}><span>CASE STUDY / 01</span><h3>Client platform<br />case study</h3><p>Replace with verified client context, delivery scope, and a measurable operational result.</p><b>Verified story pending</b></article><article className={styles.caseCard}><span>CASE STUDY / 02</span><h3>Cloud migration<br />case study</h3><p>Replace with approved before-and-after architecture, migration scope, and outcome.</p><b>Verified story pending</b></article></div><div className={styles.proofBar}><div><strong>00</strong><span>Verified projects<br />add actual count</span></div><div><strong>00</strong><span>Verified clients<br />add actual count</span></div><div><strong>00%</strong><span>Verified outcome<br />add approved metric</span></div></div><div className={styles.clientLogos} aria-label="Client logo placeholders"><span>CLIENT LOGO<br />PENDING</span><span>CLIENT LOGO<br />PENDING</span><span>CLIENT LOGO<br />PENDING</span><span>CLIENT LOGO<br />PENDING</span></div><blockquote className={styles.testimonial}>“Add an approved client testimonial here: speaker name, role, company, and permission to publish.”<cite>— Testimonial placeholder</cite></blockquote></section>
-
-      <section id="about" className={styles.about} aria-labelledby="about-title"><div className={styles.aboutCopy}><p className={styles.eyebrow}>About Mechanic Computer</p><h2 id="about-title">Engineering clarity<br />for complex work.</h2><p>We turn technical complexity into systems that teams can operate, improve, and own. Architecture, delivery, and operations stay connected from the first decision through handover.</p></div><div className={styles.team}><div className={styles.teamHead}><span>Core team</span><p>Profiles ready for verified team names, roles, and biographies.</p></div><article><div className={styles.avatar}>MC</div><h3>Founder / Engineering Lead</h3><p>Replace with verified name, specialty, and profile.</p></article><article><div className={styles.avatar}>MC</div><h3>Platform & Cloud Lead</h3><p>Replace with verified name, specialty, and profile.</p></article><article><div className={styles.avatar}>MC</div><h3>Product & AI Lead</h3><p>Replace with verified name, specialty, and profile.</p></article></div></section>
+      <section id="about" className={styles.about} aria-labelledby="about-title" data-reveal><div className={styles.aboutCopy}><p className={styles.eyebrow}>About Mechanic Computer</p><h2 id="about-title">Engineering clarity<br />for complex work.</h2><p>We turn technical complexity into systems that teams can operate, improve, and own. Architecture, delivery, and operations stay connected from the first decision through handover.</p></div><div className={styles.aboutSignal}><span>01 / SYSTEM THINKING</span><strong>Architecture before<br />implementation.</strong><p>Every engagement starts by making dependencies, ownership, and operating risk visible.</p><span>02 / DELIVERY DISCIPLINE</span><strong>Build with a path<br />to operation.</strong><p>Clear handover, observability, and maintenance are part of delivery—not an afterthought.</p></div></section>
 
       <section id="approach" className={styles.approach} aria-labelledby="approach-title"><div className={styles.sectionHead}><p className={styles.eyebrow}>How we work</p><h2 id="approach-title">Make complexity<br />operable.</h2></div><div className={styles.steps}><article><span>01</span><h3>Understand</h3><p>Map constraints, dependencies, and the real operating need.</p></article><article><span>02</span><h3>Build</h3><p>Ship systems with deliberate architecture and delivery controls.</p></article><article><span>03</span><h3>Operate</h3><p>Hand over clear ownership, visibility, and a path for improvement.</p></article></div></section>
 
