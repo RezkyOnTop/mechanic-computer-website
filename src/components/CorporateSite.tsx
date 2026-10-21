@@ -48,12 +48,12 @@ const governmentPartners = [
 ]
 
 const businessPartners = [
-  ['PT Arutmin Indonesia', 'Energi dan pertambangan', 'arutmin.com'],
-  ['PT Adaro Indonesia', 'Energi dan pertambangan', 'adaroindonesia.id'],
-  ['Jhonlin Group', 'Energi, agribisnis, logistik', 'jhonlin.co.id'],
-  ['Hasnur Group', 'Energi, perkebunan, logistik', 'hasnur.co.id'],
+  ['CV Twincom Sales & Service Center', 'Ritel dan servis komputer', 'twincom.co.id'],
+  ['CV Panda Computindo', 'Ritel dan servis komputer', 'Banjarmasin'],
+  ['CV Logika Nuansa Teknik', 'Konsultan teknologi informasi', 'logikanuansateknik.com'],
   ['PT Agita Digital Technology', 'Pengembangan perangkat lunak', 'agitatechnology.com'],
   ['Jawara Data', 'Konsultan transformasi digital', 'jawaradata.com'],
+  ['Hasnur Group', 'Energi, perkebunan, logistik', 'hasnur.co.id'],
 ]
 
 const faqs = [
