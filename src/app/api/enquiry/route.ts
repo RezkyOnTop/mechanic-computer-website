@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 
 export const runtime = 'nodejs'
 
-const to = process.env.ENQUIRY_TO || 'hello@mechaniccomputer.co.id'
+const to = process.env.ENQUIRY_TO || 'hello@mechaniccomputer.biz.id'
 const from = process.env.ENQUIRY_FROM || 'Mechanic Computer <onboarding@resend.dev>'
 const key = process.env.RESEND_API_KEY
 

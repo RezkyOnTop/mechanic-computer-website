@@ -32,7 +32,7 @@ const organizationSchema = {
     postalCode: '70714',
     addressCountry: 'ID',
   },
-  email: 'hello@mechaniccomputer.co.id',
+  email: 'hello@mechaniccomputer.biz.id',
   knowsAbout: ['AI systems', 'Cloud infrastructure', 'Backend engineering', 'DevOps'],
 }
 
