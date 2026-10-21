@@ -24,7 +24,14 @@ const organizationSchema = {
   url: 'https://mechaniccomputer.biz.id',
   description: 'AI systems, cloud infrastructure, backend platforms, and DevOps delivery.',
   areaServed: 'ID',
-  address: { '@type': 'PostalAddress', addressLocality: 'Jakarta', addressCountry: 'ID' },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Jl. Barjad, Loktabat Utara',
+    addressLocality: 'Banjarbaru Utara',
+    addressRegion: 'Kalimantan Selatan',
+    postalCode: '70714',
+    addressCountry: 'ID',
+  },
   email: 'hello@mechaniccomputer.co.id',
   knowsAbout: ['AI systems', 'Cloud infrastructure', 'Backend engineering', 'DevOps'],
 }
