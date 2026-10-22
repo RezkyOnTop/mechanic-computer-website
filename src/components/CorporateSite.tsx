@@ -64,6 +64,19 @@ const workExamples = [
   ['04', 'Pipeline rebuild', 'Delivery', 'Manual release steps replaced with a build pipeline, per-branch previews, and automated checks before anything reaches production.', 'Deploys went from hours to minutes'],
 ]
 
+const stats = [
+  ['24', 'Engagements delivered', 'across government and private sector'],
+  ['11', 'Organisations worked with', 'in South Kalimantan and beyond'],
+  ['6', 'Years operating', 'since 2019'],
+  ['98%', 'Systems still in service', 'twelve months after handover'],
+]
+
+const testimonials = [
+  ['They rebuilt our reporting layer without touching production. The dashboard that used to take forty seconds now answers before the page finishes loading.', 'IT Manager', 'Regional government office', 'South Kalimantan'],
+  ['What stood out was the handover. We were not left holding a system nobody understood — there was documentation, a walkthrough, and a number to call.', 'Operations Lead', 'Distribution company', 'Banjarmasin'],
+  ['We asked for a small fix and got a straight answer about what was actually broken. That honesty saved us from a much larger project.', 'Director', 'Software house', 'Banjarbaru'],
+]
+
 const faqs = [
   ['What type of project can we discuss?', 'AI workflows, cloud platforms, internal tools, backend APIs, operational infrastructure, and the systems around them.'],
   ['Do you work with an existing engineering team?', 'Yes. Engagement can extend an existing team, lead a focused delivery track, or prepare a clean handover.'],
@@ -144,6 +157,8 @@ export default function CorporateSite() {
       <section id="technology" className={styles.technology} aria-labelledby="tech-title"><div className={styles.techCopy}><p className={styles.eyebrow}>Technology ecosystem</p><h2 id="tech-title">Tools selected<br />to do their job.</h2><p>Production technology across product, intelligence, cloud, data, delivery, and reliability.</p><strong className={styles.techCount}>{technologyCount} production-grade tools</strong></div><div className={styles.techGroups}>{technology.map(({ group, items }) => <section className={styles.techGroup} key={group} aria-label={group}><h3>{group}<span>{String(items.length).padStart(2, '0')}</span></h3><div className={styles.logoGrid}>{items.map(([src, name]) => <div className={styles.techItem} key={`${group}-${name}`}><img src={src} alt="" /><strong>{name}</strong></div>)}</div></section>)}</div></section>
 
       <section id="partners" className={styles.partners} aria-labelledby="partners-title"><div className={styles.sectionHead}><p className={styles.eyebrow}>Partners &amp; network</p><h2 id="partners-title">Built with<br />local ground truth.</h2><p>Organisations we work alongside across South Kalimantan — public sector and private enterprise.</p></div><div className={styles.partnerBody}><div className={styles.partnerGroup}><div className={styles.partnerGroupHead}><span>Sector 01</span><h3>Government</h3><small>5 offices</small></div><ul>{governmentPartners.map(([office, area, host]) => <li key={host}><strong>{office}</strong><span>{area}</span><small>{host}</small></li>)}</ul></div><div className={styles.partnerGroup}><div className={styles.partnerGroupHead}><span>Sector 02</span><h3>Enterprise</h3><small>6 companies</small></div><ul>{businessPartners.map(([name, field, host]) => <li key={host}><strong>{name}</strong><span>{field}</span><small>{host}</small></li>)}</ul></div><p className={styles.partnerNote}>Names listed reflect organisations operating in South Kalimantan. Specific engagement scopes are shared only with permission.</p></div></section>
+
+      <section id="proof" className={styles.proof} aria-labelledby="proof-title"><div className={styles.proofHead}><div><p className={styles.eyebrow}>Track record</p><h2 id="proof-title">Measured in systems<br />still running.</h2></div><span className={styles.proofBadge}>Illustrative figures</span></div><div className={styles.statRow}>{stats.map(([value, label, note]) => <div key={label}><strong>{value}</strong><span>{label}</span><small>{note}</small></div>)}</div><div className={styles.quotes}>{testimonials.map(([quote, role, org, place]) => <figure key={quote}><blockquote>{quote}</blockquote><figcaption><b>{role}</b><span>{org} · {place}</span></figcaption></figure>)}</div><p className={styles.proofNote}>Figures and quotes on this section are illustrative placeholders used to show layout. They will be replaced with verified client results before this site is used for active sales.</p></section>
 
       <section id="work" className={styles.workSection} aria-labelledby="work-title"><div className={styles.sectionHead}><p className={styles.eyebrow}>Work examples</p><h2 id="work-title">What the work<br />actually looks like.</h2><p>Representative engagement shapes, written from delivery practice — not client case studies.</p></div><div className={styles.workGrid}>{workExamples.map(([no, title, kind, body, result]) => <article key={no}><span className={styles.workNo}>{no}</span><div><span className={styles.workKind}>{kind}</span><h3>{title}</h3><p>{body}</p><strong>{result}</strong></div></article>)}</div><p className={styles.workNote}>Examples describe the shape of work we take on. Client-specific outcomes are shared only with permission.</p></section>
 
